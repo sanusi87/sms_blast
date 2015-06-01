@@ -1,23 +1,22 @@
 var express = require('express');
-var inbox = require('inbox');
 var router = express.Router();
+var message = require('message');
 
+/* GET users listing. */
 router.get('/', function(req, res) {
 	var reqParam = {};
-	reqParam.title = 'SMS Blast - Inbox';
+	reqParam.title = 'SMS Blast - Messages';
 
-	var inb = new inbox();
-    inb.find();
+	var msg = new message();
+	msg.find();
 
-    inb.on('find_error', function(err){
+	msg.on('find_error', function(err){
 		reqParam.error = err.error;
-		res.render('index', reqParam);
+		res.render('messages', reqParam);
 	}).on('find_success', function(rows){
-		console.log(rows);
 		reqParam.rows = rows;
-		res.render('index', reqParam);
+		res.render('messages', reqParam);
 	});
 });
-
 
 module.exports = router;

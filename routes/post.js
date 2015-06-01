@@ -1,15 +1,15 @@
 var express = require('express');
-var inbox = require('inbox');
+var post = require('post');
 var router = express.Router();
 
 router.get('/', function(req, res) {
 	var reqParam = {};
-	reqParam.title = 'SMS Blast - Inbox';
+	reqParam.title = 'SMS Blast - Jobs';
 
-	var inb = new inbox();
-    inb.find();
+	var thePost = new post();
+	thePost.find();
 
-    inb.on('find_error', function(err){
+	thePost.on('find_error', function(err){
 		reqParam.error = err.error;
 		res.render('index', reqParam);
 	}).on('find_success', function(rows){
@@ -18,6 +18,5 @@ router.get('/', function(req, res) {
 		res.render('index', reqParam);
 	});
 });
-
 
 module.exports = router;

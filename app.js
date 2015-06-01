@@ -8,9 +8,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var debug = require('debug')('sms_blast');
 
-var routes = require('./routes/index');
-var users = require('./routes/message');
-var findcandidates = require('./routes/findcandidates');
+var menu_routes = require('./routes/index');
+var menu_messages = require('./routes/messages');
+var menu_posts = require('./routes/post');
+var menu_devices = require('./routes/devices');
+var menu_findcandidates = require('./routes/findcandidates');
+var menu_inbox = require('./routes/inbox');
 
 var app = express();
 
@@ -25,9 +28,12 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/findcandidates', findcandidates);
+app.use('/', menu_routes);
+app.use('/messages', menu_messages);
+app.use('/posts', menu_posts);
+app.use('/devices', menu_devices);
+app.use('/findcandidates', menu_findcandidates);
+app.use('/inbox', menu_inbox);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

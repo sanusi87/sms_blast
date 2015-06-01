@@ -1,0 +1,35 @@
+extends layout
+block content
+    h1 #{title}
+    ul
+        li
+            a(href='/messages')
+                i.fa.fa-envelope
+                |  Messages
+        li
+            a(href='/inbox')
+                i.fa.fa-inbox
+                |  Inbox
+
+    if rows && rows.length > 0
+        for e,i in rows
+            p
+                em
+                    | #{i+1} - #{e['content']}
+    else
+        if typeof(error) != 'undefined'
+            em
+                i.fa.fa-warning
+                | #{error}
+
+block js
+    script(type='text/javascript').
+        var loc = window.location;
+        var socket = io(loc.protocol+'//'+loc.host);
+
+        jQuery(function($){
+            socket.on('news', function (data) {
+                //console.log(data);
+                //socket.emit('my other event', { my: 'data' });
+            });
+        });

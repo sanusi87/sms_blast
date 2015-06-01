@@ -2,7 +2,22 @@ doctype html
 html
 	head
 		title= title
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body
+		a(href='/posts')
+			i.fa.fa-file-text-o
+			|  Posts
+		a(href='/devices')
+			i.fa.fa-mobile-phone
+			|  Devices
+		a(href='/messages')
+			i.fa.fa-envelope-o
+			|  Messages
+		a(href='/findcandidates')
+
 		block content
+
+		script(type='text/javascript', src='/javascripts/jquery-1.10.1.min.js')
+		script(type='text/javascript', src='/socket.io/socket.io.js')
 		block js
